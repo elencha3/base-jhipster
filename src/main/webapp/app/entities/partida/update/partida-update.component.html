@@ -1,0 +1,76 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-partida-heading" data-cy="PartidaCreateUpdateHeading">Create or edit a Partida</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_puntos">Puntos</label>
+          <input type="number" class="form-control" name="puntos" id="field_puntos" data-cy="puntos" formControlName="puntos" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_ganador">Ganador</label>
+          <select class="form-control" id="field_ganador" data-cy="ganador" name="ganador" formControlName="ganador">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="jugadorOption.id === editForm.get('ganador')!.value?.id ? editForm.get('ganador')!.value : jugadorOption"
+              *ngFor="let jugadorOption of jugadorsSharedCollection; trackBy: trackJugadorById"
+            >
+              {{ jugadorOption.apodo }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_perdedor">Perdedor</label>
+          <select class="form-control" id="field_perdedor" data-cy="perdedor" name="perdedor" formControlName="perdedor">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="jugadorOption.id === editForm.get('perdedor')!.value?.id ? editForm.get('perdedor')!.value : jugadorOption"
+              *ngFor="let jugadorOption of jugadorsSharedCollection; trackBy: trackJugadorById"
+            >
+              {{ jugadorOption.apodo }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_juego">Juego</label>
+          <select class="form-control" id="field_juego" data-cy="juego" name="juego" formControlName="juego">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="juegoOption.id === editForm.get('juego')!.value?.id ? editForm.get('juego')!.value : juegoOption"
+              *ngFor="let juegoOption of juegosSharedCollection; trackBy: trackJuegoById"
+            >
+              {{ juegoOption.nombre }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

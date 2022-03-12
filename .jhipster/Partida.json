@@ -1,0 +1,34 @@
+{
+  "changelogDate": "20220312153520",
+  "fields": [
+    {
+      "fieldName": "puntos",
+      "fieldType": "Long",
+      "fieldValidateRules": []
+    }
+  ],
+  "name": "Partida",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "apodo",
+      "otherEntityName": "jugador",
+      "relationshipName": "ganador",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "apodo",
+      "otherEntityName": "jugador",
+      "relationshipName": "perdedor",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nombre",
+      "otherEntityName": "juego",
+      "relationshipName": "juego",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
